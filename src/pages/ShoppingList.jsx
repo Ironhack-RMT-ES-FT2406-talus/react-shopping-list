@@ -8,26 +8,25 @@ import SearchBar from "../components/SearchBar";
 import testProducts from "../data/testProducts.json";
 
 function ShoppingList() {
-
-  const [ allProducts, setAllProducts ] = useState(testProducts) 
+  
   // initial state. change to empty array when done with add functionality
+  const [ allProducts, setAllProducts ] = useState([]) 
+  // const [ productsToDisplay, setProductsToDisplay ] = useState(testProducts) 
+  
+  const [ searchValue, setSearchValue ] = useState("")
 
   return (
     <>
 
       <h1>Shopping List</h1>
 
-      {/* all elements of the shopping list will be here */}
-      {allProducts.map((eachProduct, index) => {
-        return (
-          <div className="product-card" key={index}>
-            <h3>{eachProduct.name}</h3>
-            <p>{eachProduct.price}€</p>
-            <p>{eachProduct.isPurchased === true ? "✅" : "🟡"}</p>
-            <button>Buy</button>
-          </div>
-        )
-      })}
+      {/* <AddForm allProducts={allProducts} setAllProducts={setAllProducts}/> */}
+      <AddForm setAllProducts={setAllProducts}/>
+
+      {/* <SearchBar allProducts={allProducts} setAllProducts={setProductsToDisplay}/> */}
+      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue}/>
+
+      <ProductList allProducts={allProducts} searchValue={searchValue} setAllProducts={setAllProducts}/>
 
     </>
   )
